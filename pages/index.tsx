@@ -59,7 +59,7 @@ export default function Home() {
             <div className='flex gap-2 p-2'>
               {/* <Button small type='secondary' onClick={() => { loadFromLocalStorage() }}><span>Load</span></Button>
               <Button small type='secondary' onClick={() => { saveToLocalStorage() }}><span>Save</span></Button> */}
-              <Button small type='secondary' onClick={() => { addStaffCards() }}>Add Staff Cards</Button>
+              <Button small type='secondary' onClick={() => { addStaffCards() }}><span>Add Staff Cards</span></Button>
               <Button small type='secondary' onClick={() => { printList() }}><span>Print</span></Button>
             </div>
           </div>
