@@ -28,9 +28,9 @@ export default function Card({ id, content, onDelete, onInput }: { id: string, c
         className="bg-white p-2 m-2 rounded shadow"
     >
         <div className='flex justify-between gap-2'>
-            <span className='flex items-center cursor-pointer p-1 hover:bg-gray-100 active:bg-gray-200 rounded' {...listeners} {...attributes}><MdDragIndicator /></span>
+            <span className='flex items-center cursor-pointer p-1 hover:bg-gray-100 active:bg-gray-200 rounded noprint' {...listeners} {...attributes}><MdDragIndicator /></span>
             <span contentEditable onInput={ (e) => { onInput(e) } } suppressContentEditableWarning className='flex items-center'>{ content }</span>
-            <span className='flex items-center cursor-pointer p-1 hover:bg-red-100 active:bg-red-300 rounded' onClick={onDelete}><MdClose /></span>
+            <span className='flex items-center cursor-pointer p-1 hover:bg-red-100 active:bg-red-300 rounded noprint' onClick={onDelete}><MdClose /></span>
         </div>
     </div>
   );

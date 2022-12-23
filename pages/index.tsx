@@ -53,18 +53,17 @@ export default function Home() {
             <div className='flex items-center justify-center'>
               <h1 
                 contentEditable suppressContentEditableWarning 
-                className='text-xl font-bold' 
-                onInput={ (e) => { updateProjectName(e) } }
+                className='text-xl font-bold'
               >{ project.title }</h1>
             </div>
             <div className='flex gap-2 p-2'>
-              <Button small type='secondary' onClick={() => {}}><span>Load</span></Button>
-              <Button small type='secondary' onClick={() => {}}><span>Save</span></Button>
-              <Button small type='secondary' onClick={() => {}}><span>Print</span></Button>
+              {/* <Button small type='secondary' onClick={() => { loadFromLocalStorage() }}><span>Load</span></Button>
+              <Button small type='secondary' onClick={() => { saveToLocalStorage() }}><span>Save</span></Button> */}
+              <Button small type='secondary' onClick={() => { printList() }}><span>Print</span></Button>
             </div>
           </div>
 
-          <p>{ project.title }</p>
+          <p>{ project.id }</p>
           <hr className='mb-2' />
 
           <div className='mb-2 px-2'>
@@ -94,7 +93,7 @@ export default function Home() {
               <h3 className='text-lg font-bold'>Card Bank</h3>
               <Button onClick={addCard}><p>Add Card</p></Button>
             </div>
-            <div className="flex">
+            <div className="flex flex-wrap">
               { 
                 cards.map((card, index) => {
                   return card.parent === null ? <Card id={card.id} content={card.content} onDelete={ () => { deleteCard(card.id) } } onInput={ (e) => { cardOnInput(e, card.id) } } key={index} /> : null;
@@ -193,10 +192,22 @@ export default function Home() {
   // ---------------- Save and Load ----------------
   function saveToLocalStorage() {
 
+     const save = {
+      project: project,
+      cards: cards,
+      rows: rows
+     }
+
+    const data = JSON.stringify(save);
+    window.localStorage.setItem(project.title, data);
   }
 
   function loadFromLocalStorage() {
 
+  }
+
+  function printList() {
+    window.print();
   }
 
 }

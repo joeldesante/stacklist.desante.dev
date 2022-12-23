@@ -20,7 +20,7 @@ export default function Row({ id, name, children, onDelete, onInput }: { id: str
             <div className="flex grow items-center flex-wrap" ref={ setNodeRef }>
                 { children }
             </div>
-            <div className="flex flex-none items-center">
+            <div className="flex flex-none items-center noprint">
                 <span className='flex items-center cursor-pointer p-1 hover:bg-red-100 active:bg-red-300 rounded' onClick={onDelete}><MdClose /></span>
             </div>
         </div>
