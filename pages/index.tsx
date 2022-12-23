@@ -59,6 +59,7 @@ export default function Home() {
             <div className='flex gap-2 p-2'>
               {/* <Button small type='secondary' onClick={() => { loadFromLocalStorage() }}><span>Load</span></Button>
               <Button small type='secondary' onClick={() => { saveToLocalStorage() }}><span>Save</span></Button> */}
+              <Button small type='secondary' onClick={() => { addStaffRows() }}><span>Add Staff Rows</span></Button>
               <Button small type='secondary' onClick={() => { addStaffCards() }}><span>Add Staff Cards</span></Button>
               <Button small type='secondary' onClick={() => { printList() }}><span>Print</span></Button>
             </div>
@@ -212,6 +213,77 @@ export default function Home() {
     ]
     
     setCards(staff);
+  }
+  
+  function addStaffRows() {
+    const staff = [
+      {
+        name: "Joel",
+        id: nanoid()
+      },
+      {
+        name: "Fred",
+        id: nanoid()
+      },
+      {
+        name: "Tommy",
+        id: nanoid()
+      },
+      {
+        name: "Braeden",
+        id: nanoid()
+      },
+      {
+        name: "Maura",
+        id: nanoid()
+      },
+      {
+        name: "Jay",
+        id: nanoid()
+      },
+      {
+        name: "Jonathan",
+        id: nanoid()
+      },
+      {
+        name: "Jason",
+        id: nanoid()
+      },
+      {
+        name: "Alex S",
+        id: nanoid()
+      },
+      {
+        name: "Andrew",
+        id: nanoid()
+      },
+      {
+        name: "Abele",
+        id: nanoid()
+      },
+      {
+        name: "Noah",
+        id: nanoid()
+      },
+      {
+        name: "Alex G",
+        id: nanoid()
+      },
+      {
+        name: "Tey",
+        id: nanoid()
+      },
+      {
+        name: "Tyler",
+        id: nanoid()
+      },
+      {
+        name: "Jensen",
+        id: nanoid()
+      }
+    ]
+    
+    setRows(staff);
   }
 
   function cardOnInput(e: React.FormEvent, id: string) {
