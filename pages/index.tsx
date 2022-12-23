@@ -59,6 +59,7 @@ export default function Home() {
             <div className='flex gap-2 p-2'>
               {/* <Button small type='secondary' onClick={() => { loadFromLocalStorage() }}><span>Load</span></Button>
               <Button small type='secondary' onClick={() => { saveToLocalStorage() }}><span>Save</span></Button> */}
+              <Button small type='secondary' onClick={() => { addStaffCards() }}>Add Staff Cards</Button>
               <Button small type='secondary' onClick={() => { printList() }}><span>Print</span></Button>
             </div>
           </div>
@@ -123,6 +124,94 @@ export default function Home() {
       parent: null,
       id: nanoid()
     }))
+  }
+  
+  function addStaffCards() {
+    
+    const staff = [
+      {
+        content: "Joel",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Fred",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Tommy",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Braeden",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Maura",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Jay",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Jonathan",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Jason",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Alex S",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Andrew",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Abele",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Noah",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Alex G",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Tey",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Tyler",
+        parent: null,
+        id: nanoid()
+      },
+      {
+        content: "Jensen",
+        parent: null,
+        id: nanoid()
+      }
+    ]
+    
+    setCards(staff);
   }
 
   function cardOnInput(e: React.FormEvent, id: string) {
