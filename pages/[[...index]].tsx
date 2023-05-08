@@ -4,6 +4,7 @@ import Row, { RowData } from '../components/row'
 import Card, { CardData } from '../components/card'
 import { DndContext } from '@dnd-kit/core'
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
 import {nanoid} from "nanoid"
 import Button from '../components/button'
 
@@ -19,6 +20,11 @@ interface Project {
 }
 
 export default function Home() {
+
+  const router = useRouter();
+  const projectData = router.query.index;
+
+  const [ projectId, setProjectId ] = useState<String>(nanoid());
 
   const [ project, setProject ] = useState<Project>({
     title: "Untitled Stacklist"
@@ -38,6 +44,24 @@ export default function Home() {
       id: nanoid()
     }
   ]);
+
+  useEffect(() => {
+    if(!router.isReady) return;
+    if(projectData !== undefined) {
+      try {
+        let data = atob(projectData)
+        data = JSON.parse(data)
+
+        setProjectId(data.id)
+        setProject(data.project)
+        setRows(data.rows)
+        setCards(data.cards)
+  
+      } catch {
+        return <p>This link is invalid.</p>
+      }
+    }
+  }, [router.isReady])
 
   return (
     <>
@@ -62,6 +86,7 @@ export default function Home() {
               <Button small type='secondary' onClick={() => { addStaffRows() }}><span>Add Staff Rows</span></Button>
               <Button small type='secondary' onClick={() => { addStaffCards() }}><span>Add Staff Cards</span></Button>
               <Button small type='secondary' onClick={() => { printList() }}><span>Print</span></Button>
+              <Button small type='secondary' onClick={() => { saveToLocalStorage() }}><span>Save</span></Button>
             </div>
           </div>
 
@@ -105,6 +130,14 @@ export default function Home() {
           </section>
         </main>
       </DndContext>
+      <dialog id="loadScreen">
+        <h2 className='text-lg font-bold'>Saved Lists</h2>
+        <ul>
+            {
+              getSavedLists()
+            }
+        </ul>
+      </dialog>
     </>
   );
 
@@ -354,21 +387,30 @@ export default function Home() {
   function saveToLocalStorage() {
 
      const save = {
+      id: projectId,
       project: project,
       cards: cards,
       rows: rows
      }
 
     const data = JSON.stringify(save);
-    window.localStorage.setItem(project.title, data);
+    const base64data = btoa(data)
+    window.localStorage.setItem(projectId, base64data);
+
+    console.log("Redirecting")
+    router.push(base64data)
   }
 
   function loadFromLocalStorage() {
-
+    let dialog = document.querySelector("#loadScreen")
+    dialog.showModal()
   }
 
   function printList() {
     window.print();
+  }
+
+  function getSavedLists() {
   }
 
 }
