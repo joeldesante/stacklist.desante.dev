@@ -57,9 +57,7 @@ export default function Home() {
         setRows(data.rows)
         setCards(data.cards)
   
-      } catch {
-        return <p>This link is invalid.</p>
-      }
+      } catch {}
     }
   }, [router.isReady])
 
