@@ -49,12 +49,17 @@ export default function Home() {
     if(!router.isReady) return;
     if(projectData !== undefined) {
       try {
+        //@ts-ignore
         let data = atob(projectData)
         data = JSON.parse(data)
 
+        //@ts-ignore
         setProjectId(data.id)
+        //@ts-ignore
         setProject(data.project)
+        //@ts-ignore
         setRows(data.rows)
+        //@ts-ignore
         setCards(data.cards)
   
       } catch {}
@@ -128,14 +133,6 @@ export default function Home() {
           </section>
         </main>
       </DndContext>
-      <dialog id="loadScreen">
-        <h2 className='text-lg font-bold'>Saved Lists</h2>
-        <ul>
-            {
-              getSavedLists()
-            }
-        </ul>
-      </dialog>
     </>
   );
 
@@ -393,22 +390,15 @@ export default function Home() {
 
     const data = JSON.stringify(save);
     const base64data = btoa(data)
+    //@ts-ignore
     window.localStorage.setItem(projectId, base64data);
 
     console.log("Redirecting")
     router.push(base64data)
   }
 
-  function loadFromLocalStorage() {
-    let dialog = document.querySelector("#loadScreen")
-    dialog.showModal()
-  }
-
   function printList() {
     window.print();
-  }
-
-  function getSavedLists() {
   }
 
 }
