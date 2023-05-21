@@ -8,42 +8,16 @@ import { useRouter } from 'next/router';
 import {nanoid} from "nanoid"
 import Button from '../components/button'
 
-const inter = Inter({ subsets: ['latin'] })
+import { Card, Row, Project } from '../lib/project'
 
-interface Project {
-  id?: string | null,
-  title: string,
-  rows?: Array<RowData>
-  cards?: Array<CardData>
-  createdOn?: number
-  updatedOn?: number
-}
+const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
   const router = useRouter();
   const projectData = router.query.index;
 
-  const [ projectId, setProjectId ] = useState<String>(nanoid());
-
-  const [ project, setProject ] = useState<Project>({
-    title: "Untitled Stacklist"
-  });
-
-  const [ rows, setRows ] = useState<Array<RowData>>([
-    {
-      name: "Untitled Row",
-      id: nanoid()
-    }
-  ]);
-
-  const [ cards, setCards ] = useState<Array<CardData>>([
-    {
-      content: "Untitled Card",
-      parent: null,
-      id: nanoid()
-    }
-  ]);
+  const [ project, setProject ] = useState<Project>();
 
   useEffect(() => {
     if(!router.isReady) return;
