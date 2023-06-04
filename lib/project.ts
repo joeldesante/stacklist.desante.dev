@@ -1,37 +1,66 @@
 import { nanoid } from "nanoid"
+import { threadId } from "worker_threads"
 
-export class Row {
-    readonly id: string
+export interface Identifiable {
+    id: string
+}
+
+export class Row implements Identifiable {
+    id: string
     name: string
     cards: Array<Card>
-
-    constructor(name?: string, id?: string, cards?: Array<Card>) {
-        this.name = name ?? 'Untitled Row'
-        this.id = id ?? nanoid()
-        this.cards = cards ?? new Array<Card>()
+    
+    constructor(id: string, name: string, cards: Array<Card>) {
+        this.id = id;
+        this.name = name;
+        this.cards = cards;
     }
 }
 
-export class Card {
-    readonly id: string
-    name: string
+/**
+ * Helper function to create new rows.
+ * @param name The name of the row
+ * @param id Optional parameter to directly set the cards ID. Will auto generate an ID if undefined.
+ * @returns New row object
+ */
+export function createRow(name: string, id?: string): Row {
+    return new Row(id ?? nanoid(), name, []);
+}
 
-    constructor(name?: string, id?: string) {
-        this.name = name ?? 'Untitled Card'
-        this.id = id ?? nanoid()
+export class Card implements Identifiable {
+    id: string
+    value: string
+
+    constructor(id: string, value: string) {
+        this.id = id;
+        this.value = value
     }
+}
+
+/**
+ * Helper function to create new cards.
+ * @param value The value of the card
+ * @param id Optional parameter to set the card id manually. Auto generates an ID if undefined
+ * @returns New card object
+ */
+export function createCard(value: string, id?: string): Card {
+    return new Card(id ?? nanoid(), value);
 }
 
 export class Project {
-    readonly id: string
     name: string
     rows: Array<Row>
+    cards: Array<Card>
 
-    constructor(name?: string, id?: string, rows?: Array<Row>) {
-        this.name = name ?? 'Untitled Project'
-        this.id = id ?? nanoid()
-        this.rows = rows ?? new Array<Row>()
+    constructor(name: string, rows: Array<Row>, cards: Array<Card>) {
+        this.name = name;
+        this.rows = rows;
+        this.cards = cards;
     }
+}
+
+export function createProject(name: string): Project {
+    return new Project(name, [], [])
 }
 
 export function meaningOfLife(input: any) {
